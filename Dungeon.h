@@ -1,9 +1,14 @@
 #ifndef DUNGEON_H
 #define DUNGEON_H
 
+#include "Cuarto.h"
+#include "DoubleLinkedList.h"
+
 class Dungeon {
    public:
-    int dato;
+    void                     imprimeCuartos();
+    bool                     createRoom(Monster &copiaMonstruo);
+    DoubleLinkedList<Cuarto> roomList;
 
    private:
 };

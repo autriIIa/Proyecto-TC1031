@@ -14,14 +14,58 @@ bool Catalogo::loadFromCSV(const std::string &filename) {
         return false;
     }
 
-    int num = 0;
+    int count = 0, num = 0;
 
     while (std::getline(file, line) && num < 2) {
         std::istringstream words(line);
-        while (std::getline(words, word, ','))
-            std::cout << word << std::endl;
-        num++;
+        Monster            miMonstruo;
+        while (std::getline(words, word, ',')) {
+            switch (count) {
+                case 0: {
+                    miMonstruo.setName(word);
+                    break;
+                }
+                case 1: {
+                    float numero = std::stod(word);
+                    miMonstruo.setCR(numero);
+                    break;
+                }
+                case 2: {
+                    miMonstruo.setType(word);
+                    break;
+                }
+                case 3: {
+                    miMonstruo.setSize(word);
+                    break;
+                }
+                case 4: {
+                    int numero = std::stoi(word);
+                    miMonstruo.setAC(numero);
+                    break;
+                }
+                case 5: {
+                    int numero = std::stoi(word);
+                    miMonstruo.setHP(numero);
+                    break;
+                }
+                case 6: {
+                    miMonstruo.setAlign(word);
+                    break;
+                }
+                default:
+                    break;
+                    ;
+            }
+            count++;
+        }
+        catalogoMonstruos.insertar(miMonstruo);
+        count = 0;
     }
 
     return true;
+}
+
+Monster Catalogo::getRandomMonster() {
+    Monster *newMonster;
+    return newMonster;
 }

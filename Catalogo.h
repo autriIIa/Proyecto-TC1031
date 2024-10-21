@@ -1,11 +1,13 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+
+#include "BinaryTree.h"
 #include "Monster.h"
-#include "BinaryTree"
 
 class Catalogo {
    public:
-    bool loadFromCSV(const std::string &filename);
-    
+    BinaryTree<Monster> catalogoMonstruos;
+    bool                loadFromCSV(const std::string &filename);
+    Monster            *getRandomMonster();
 };
