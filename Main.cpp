@@ -1,3 +1,4 @@
+#include <ctime>
 #include <iostream>
 
 #include "Catalogo.h"
@@ -17,28 +18,16 @@ int main() {
         return 0;
     }
 
-    Monster m1 = miCatalogo.getRandomMonster();
-
-    cout << m1 << endl;
-    /*
     cout << "Creando Dungeon..." << endl;
+
     for (int c = 0; c < NUM_CUARTOS; c++) {
-        Monster *pMonster = nullptr, copiaMonstruo;
+        Monster pMonster, copiaMonstruo;
 
         pMonster = miCatalogo.getRandomMonster();
-        if (!pMonster) {
-            cout << "No se pudo obtener un monstruo del catalogo" << endl;
-            return 0;
-        }
-
-        copiaMonstruo = *pMonster;
-        if (!miDungeon.createRoom(copiaMonstruo)) {
-            cout << "No se pudo insertar cuarto con monstruo al calabozo" << endl;
-            return 0;
-        }
+        miDungeon.createRoom(pMonster);
     }
 
     miDungeon.imprimeCuartos();
-    */
+
     return 0;
 };

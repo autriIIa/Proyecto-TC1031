@@ -92,7 +92,7 @@ class DoubleLinkedList {
         NodeDL<T> *temp = head;
 
         while (temp) {
-            std::cout << temp->data << " ";
+            std::cout << temp->data << " \n";
             temp = temp->next;
         }
         std::cout << "\n";

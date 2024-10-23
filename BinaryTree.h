@@ -50,6 +50,7 @@ class BinaryTree {
     bool buscar(T dato) {
         return buscarRecursivo(root, dato);
     }
+
     void imprimir(const std::string &prefix, const NodeBT<T> *node, bool isLeft) {
         if (node != nullptr) {
             std::cout << prefix;
@@ -131,11 +132,9 @@ class BinaryTree {
         if (root == nullptr || size == 0)
             return nullptr;
 
-        // Generar un índice aleatorio entre 0 y size - 1
-        srand(static_cast<unsigned>(time(0)));  // Semilla aleatoria
         int randomIndex = rand() % size;
-
         int count = 0;
+
         return getRandomNodeRecursivo(root, randomIndex, count);
     }
 };

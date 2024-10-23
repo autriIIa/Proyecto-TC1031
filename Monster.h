@@ -15,7 +15,7 @@ class Monster {
 
    public:
     friend std::ostream &operator<<(std::ostream &os, const Monster &monster) {
-        os << "Name: " << monster.name;
+        os << monster.name;
         return os;
     };
 
