@@ -6,8 +6,10 @@
 #include "Monster.h"
 
 class Catalogo {
-   public:
+   private:
     BinaryTree<Monster> catalogoMonstruos;
-    bool                loadFromCSV(const std::string &filename);
-    Monster             getRandomMonster();
+
+   public:
+    bool    loadFromCSV(const std::string &filename);
+    Monster getRandomMonster();
 };

@@ -1,13 +1,15 @@
 #include <BinaryTree.h>
 
 #include <Monster>
+
+#include "LinkedList.h"
 #ifndef JUGADOR_H
 #define JUGADOR_H
 class Jugador {
    private:
     float               vida;
     float               ataque;
-    BinaryTree<Monster> monstruosDerrotados;
+    LinkedList<Monster> monstruosDerrotados;
 
    public:
     Jugador();

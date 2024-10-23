@@ -1,4 +1,3 @@
-#include <ctime>
 #include <iostream>
 
 #include "Catalogo.h"
@@ -12,6 +11,8 @@ using namespace std;
 int main() {
     Catalogo miCatalogo;
     Dungeon  miDungeon;
+
+    srand((unsigned int)time(0));
 
     if (!miCatalogo.loadFromCSV("monsters.csv")) {
         cout << "No se pudo crear el catalogo" << endl;

@@ -1,6 +1,7 @@
 #ifndef BINARYTREE_H
 #define BINARYTREE_H
 
+#include <ctime>
 #include <iostream>
 #include <string>
 
@@ -9,8 +10,9 @@ template <typename T>
 
 class BinaryTree {
    private:
-    int  size;
-    bool insertarRecursivo(NodeBT<T> *&nodo, T dato) {
+    NodeBT<T> *root;
+    int        size;
+    bool       insertarRecursivo(NodeBT<T> *&nodo, T dato) {
         if (nodo == nullptr) {
             nodo = new (std::nothrow) NodeBT<T>(dato);
             if (!nodo)
@@ -38,55 +40,19 @@ class BinaryTree {
         return true;
     }
 
-   public:
-    NodeBT<T> *root;
-    BinaryTree() {
-        root = nullptr;
-        size = 0;
-    }
-    bool insertar(T dato) {
-        return insertarRecursivo(root, dato);
-    }
-    bool buscar(T dato) {
-        return buscarRecursivo(root, dato);
-    }
+    NodeBT<T> *getRandomNodeRecursivo(NodeBT<T> *node, int index, int &count) {
+        if (node == nullptr)
+            return nullptr;
 
-    void imprimir(const std::string &prefix, const NodeBT<T> *node, bool isLeft) {
-        if (node != nullptr) {
-            std::cout << prefix;
+        NodeBT<T> *leftResult = getRandomNodeRecursivo(node->left, index, count);
+        if (leftResult != nullptr)
+            return leftResult;
 
-            std::cout << (isLeft ? "├──" : "└──");
+        if (count == index)
+            return node;
+        count++;
 
-            // print the value of the node
-            std::cout << node->dato << std::endl;
-
-            // enter the next tree level - left and right branch
-            imprimir(prefix + (isLeft ? "│   " : "    "), node->left, true);
-            imprimir(prefix + (isLeft ? "│   " : "    "), node->right, false);
-        }
-    }
-
-    bool eliminarDatoRecursivo(NodeBT<T> *&actual, T dato) {
-        if (actual == nullptr)
-            return false;
-
-        if (dato < actual)
-            return (eliminarDatoRecursivo(actual->left, dato));
-        else if (dato > actual->dato)
-            return (eliminarDatoRecursivo(actual->right, dato));
-        else {
-            NodeBT<T> *borrar = nullptr;
-            borrar = actual;
-            if (!actual->left)
-                actual = actual->right;
-            else if (!actual->right)
-                actual = actual->left;
-            else
-                borrar = reemplazaLeft(actual);
-            delete borrar;
-            size--;
-            return true;
-        }
+        return getRandomNodeRecursivo(node->right, index, count);
     }
 
     NodeBT<T> *reemplazaLeft(NodeBT<T> *nodo) {
@@ -110,22 +76,39 @@ class BinaryTree {
         return rightMostFromleft;
     }
 
-    NodeBT<T> *getRandomNodeRecursivo(NodeBT<T> *node, int index, int &count) {
-        if (node == nullptr)
-            return nullptr;
+   public:
+    BinaryTree() {
+        root = nullptr;
+        size = 0;
+    }
+    bool insertar(T dato) {
+        return insertarRecursivo(root, dato);
+    }
+    bool buscar(T dato) {
+        return buscarRecursivo(root, dato);
+    }
 
-        // Primero, recorre el subárbol izquierdo
-        NodeBT<T> *leftResult = getRandomNodeRecursivo(node->left, index, count);
-        if (leftResult != nullptr)
-            return leftResult;
+    bool eliminarDatoRecursivo(NodeBT<T> *&actual, T dato) {
+        if (actual == nullptr)
+            return false;
 
-        // Luego, el nodo actual
-        if (count == index)
-            return node;
-        count++;
-
-        // Finalmente, recorre el subárbol derecho
-        return getRandomNodeRecursivo(node->right, index, count);
+        if (dato < actual)
+            return (eliminarDatoRecursivo(actual->left, dato));
+        else if (dato > actual->dato)
+            return (eliminarDatoRecursivo(actual->right, dato));
+        else {
+            NodeBT<T> *borrar = nullptr;
+            borrar = actual;
+            if (!actual->left)
+                actual = actual->right;
+            else if (!actual->right)
+                actual = actual->left;
+            else
+                borrar = reemplazaLeft(actual);
+            delete borrar;
+            size--;
+            return true;
+        }
     }
 
     NodeBT<T> *getRandomNode() {
