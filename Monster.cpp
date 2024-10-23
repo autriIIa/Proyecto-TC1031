@@ -1,6 +1,13 @@
 #include "Monster.h"
 
 Monster::Monster() {
+    name = "";
+    cr = 0.0;
+    type = "";
+    size = "";
+    ac = 0;
+    hp = 0;
+    ac = 0;
 }
 
 void Monster::setName(const std::string &newName) {

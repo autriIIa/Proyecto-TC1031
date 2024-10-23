@@ -66,6 +66,9 @@ bool Catalogo::loadFromCSV(const std::string &filename) {
 }
 
 Monster Catalogo::getRandomMonster() {
-    Monster *newMonster;
-    return newMonster;
+    NodeBT<Monster> *randomNode = catalogoMonstruos.getRandomNode();  // Obtener el nodo aleatorio
+    if (randomNode != nullptr) {
+        return randomNode->dato;  // Devolver el Monster almacenado en el nodo
+    }
+    throw std::runtime_error("No hay monstruos en el catálogo.");
 }

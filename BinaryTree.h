@@ -9,11 +9,13 @@ template <typename T>
 
 class BinaryTree {
    private:
+    int  size;
     bool insertarRecursivo(NodeBT<T> *&nodo, T dato) {
         if (nodo == nullptr) {
             nodo = new (std::nothrow) NodeBT<T>(dato);
             if (!nodo)
                 return false;
+            size++;
             return true;
         }
 
@@ -40,6 +42,7 @@ class BinaryTree {
     NodeBT<T> *root;
     BinaryTree() {
         root = nullptr;
+        size = 0;
     }
     bool insertar(T dato) {
         return insertarRecursivo(root, dato);
@@ -80,8 +83,9 @@ class BinaryTree {
             else
                 borrar = reemplazaLeft(actual);
             delete borrar;
+            size--;
+            return true;
         }
-        return true;
     }
 
     NodeBT<T> *reemplazaLeft(NodeBT<T> *nodo) {
@@ -103,6 +107,36 @@ class BinaryTree {
             parent->right = rightMostFromleft->left;
 
         return rightMostFromleft;
+    }
+
+    NodeBT<T> *getRandomNodeRecursivo(NodeBT<T> *node, int index, int &count) {
+        if (node == nullptr)
+            return nullptr;
+
+        // Primero, recorre el subárbol izquierdo
+        NodeBT<T> *leftResult = getRandomNodeRecursivo(node->left, index, count);
+        if (leftResult != nullptr)
+            return leftResult;
+
+        // Luego, el nodo actual
+        if (count == index)
+            return node;
+        count++;
+
+        // Finalmente, recorre el subárbol derecho
+        return getRandomNodeRecursivo(node->right, index, count);
+    }
+
+    NodeBT<T> *getRandomNode() {
+        if (root == nullptr || size == 0)
+            return nullptr;
+
+        // Generar un índice aleatorio entre 0 y size - 1
+        srand(static_cast<unsigned>(time(0)));  // Semilla aleatoria
+        int randomIndex = rand() % size;
+
+        int count = 0;
+        return getRandomNodeRecursivo(root, randomIndex, count);
     }
 };
 

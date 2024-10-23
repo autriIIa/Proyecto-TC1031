@@ -5,10 +5,12 @@
 #include "DoubleLinkedList.h"
 
 class Dungeon {
-   public:
-    void                     imprimeCuartos();
-    bool                     createRoom(Monster &copiaMonstruo);
+   private:
     DoubleLinkedList<Cuarto> roomList;
+
+   public:
+    void imprimeCuartos();
+    bool createRoom(Monster copiaMonstruo);
 
    private:
 };

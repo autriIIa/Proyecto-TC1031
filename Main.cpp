@@ -16,6 +16,10 @@ int main() {
         cout << "No se pudo crear el catalogo" << endl;
         return 0;
     }
+
+    Monster m1 = miCatalogo.getRandomMonster();
+
+    cout << m1 << endl;
     /*
     cout << "Creando Dungeon..." << endl;
     for (int c = 0; c < NUM_CUARTOS; c++) {

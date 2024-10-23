@@ -18,11 +18,9 @@ class DoubleLinkedList {
 
     bool insertarInicio(T value) {
         NodeDL<T> *newnode = nullptr;
-        newnode = new (std::nothrow) NodeDL<T>;
+        newnode = new (std::nothrow) NodeDL<T>(value);
         if (!newnode)
             return false;
-
-        newnode->data = value;
 
         if (head) {
             newnode->prev = nullptr;
@@ -32,6 +30,7 @@ class DoubleLinkedList {
         head = newnode;
         return true;
     }
+
     bool insertarFinal(T value) {
         NodeDL<T> *newNode = nullptr;
         newNode = new (std::nothrow) NodeDL<T>;

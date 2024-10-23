@@ -18,6 +18,7 @@ class Monster {
         os << "Name: " << monster.name;
         return os;
     };
+
     Monster();
 
     bool operator>(const Monster &otherMonster) {
@@ -27,6 +28,7 @@ class Monster {
     bool operator<(const Monster &otherMonster) {
         return otherMonster.hp < this->hp;
     }
+
     void setName(const std::string &newName);
     void setCR(float newCR);
     void setType(const std::string &newType);
