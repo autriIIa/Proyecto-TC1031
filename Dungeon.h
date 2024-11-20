@@ -2,15 +2,19 @@
 #define DUNGEON_H
 
 #include "Cuarto.h"
-#include "DoubleLinkedList.h"
+#include "Graph.h"
 
 class Dungeon {
    private:
-    DoubleLinkedList<Cuarto> roomList;
+    Graph<Cuarto> roomList;
 
    public:
+    int getSize() {
+        return roomList.getSize();
+    }
     void imprimeCuartos();
-    bool createRoom(Monster copiaMonstruo);
+    bool createRoom(int position, Monster copiaMonstruo);
+    bool createDungeon(const std::string &fileName);
 
    private:
 };

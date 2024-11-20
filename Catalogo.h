@@ -10,6 +10,6 @@ class Catalogo {
     BinaryTree<Monster> catalogoMonstruos;
 
    public:
-    bool    loadFromCSV(const std::string &filename);
+    bool loadFromCSV(const std::string& filename);
     Monster getRandomMonster();
 };

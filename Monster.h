@@ -6,11 +6,11 @@
 class Monster {
    private:
     std::string name;
-    float       cr;
+    float cr;
     std::string type;
     std::string size;
-    int         ac;
-    int         hp;
+    int ac;
+    int hp;
     std::string align;
 
    public:
@@ -28,7 +28,13 @@ class Monster {
     bool operator<(const Monster &otherMonster) {
         return otherMonster.hp < this->hp;
     }
+    std::string getName() {
+        return name;
+    }
 
+    int getHP() const {
+        return hp;
+    }
     void setName(const std::string &newName);
     void setCR(float newCR);
     void setType(const std::string &newType);

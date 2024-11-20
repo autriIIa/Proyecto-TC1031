@@ -2,7 +2,7 @@
 
 bool Catalogo::loadFromCSV(const std::string &filename) {
     std::ifstream file;
-    std::string   line, word;
+    std::string line, word;
 
     file.open(filename, std::ifstream::in);
 
@@ -14,11 +14,11 @@ bool Catalogo::loadFromCSV(const std::string &filename) {
         return false;
     }
 
-    int count = 0, num = 0;
+    int count = 0;
 
-    while (std::getline(file, line) && num < 2) {
+    while (std::getline(file, line)) {
         std::istringstream words(line);
-        Monster            miMonstruo;
+        Monster miMonstruo;
         while (std::getline(words, word, ',')) {
             switch (count) {
                 case 0: {
@@ -54,21 +54,21 @@ bool Catalogo::loadFromCSV(const std::string &filename) {
                 }
                 default:
                     break;
-                    ;
             }
             count++;
         }
-        catalogoMonstruos.insertar(miMonstruo);
         count = 0;
+        catalogoMonstruos.insertar(miMonstruo);
     }
 
     return true;
 }
 
 Monster Catalogo::getRandomMonster() {
-    NodeBT<Monster> *randomNode = catalogoMonstruos.getRandomNode();  // Obtener el nodo aleatorio
-    if (randomNode != nullptr) {
-        return randomNode->dato;  // Devolver el Monster almacenado en el nodo
+    NodeBT<Monster> *randomNode = catalogoMonstruos.getRandomNode();
+
+    if (!randomNode) {
+        return Monster();
     }
-    throw std::runtime_error("No hay monstruos en el catálogo.");
+    return randomNode->dato;
 }

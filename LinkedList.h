@@ -1,13 +1,11 @@
-#ifndef LINKEDLIST_H
-#define LINKEDLIST_H
+#pragma once
 
 #include "Node.h"
 template <typename T>
 class LinkedList {
-   private:
-    Node<T> *head;
-
+   protected:
    public:
+    Node<T> *head;
     LinkedList() {
         head = nullptr;
     }
@@ -63,6 +61,20 @@ class LinkedList {
 
         std::cout << "\n";
     }
+
+    bool imprimirLista(std::ofstream &file) {
+        if (!file)
+            return false;
+
+        Node<T> *temp = head;
+
+        while (temp) {
+            file << temp->data << " ";
+            temp = temp->next;
+        }
+        return true;
+    }
+
     // O(n)
     bool eliminaDato(T target) {
         if (!head) {
@@ -89,6 +101,7 @@ class LinkedList {
             previus = current;
             current = current->next;
         }
+
         return false;
     }
 
@@ -100,6 +113,70 @@ class LinkedList {
             head = temp;
         }
     }
+
+    // O(n)
+    int cuentaValor(T target) {
+        int count = 0;
+
+        if (!head)
+            return -1;
+
+        Node<T> *temp = head;
+
+        while (temp) {
+            if (temp->data == target)
+                count++;
+            temp = temp->next;
+        }
+
+        return count;
+    }
+
+    bool findData(T target) {
+        Node<T> *temp = head;
+
+        while (temp) {
+            if (temp->data == target)
+                return true;
+            temp = temp->next;
+        }
+
+        return false;
+    }
 };
 
-#endif
+// template <typename T>
+// class iterator {
+//    private:
+//     Node<T> *current;
+
+//    public:
+//     iterator(Node<T> *node) : current(node) {
+//     }
+
+//     T &operator*() {
+//         return current->data;
+//     }
+
+//     iterator &operator++() {
+//         if (current)
+//             current = current->next;
+//         return *this;
+//     }
+
+//     bool operator==(const iterator &other) const {
+//         return current == other.current;
+//     }
+
+//     bool operator!=(const iterator &other) const {
+//         return current != other.current;
+//     }
+// };
+
+// iterator begin() {
+//     return iterator(head);
+// }
+
+// iterator end() {
+//     return iterator(nullptr);
+// }

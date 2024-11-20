@@ -11,8 +11,8 @@ template <typename T>
 class BinaryTree {
    private:
     NodeBT<T> *root;
-    int        size;
-    bool       insertarRecursivo(NodeBT<T> *&nodo, T dato) {
+    int size;
+    bool insertarRecursivo(NodeBT<T> *&nodo, T dato) {
         if (nodo == nullptr) {
             nodo = new (std::nothrow) NodeBT<T>(dato);
             if (!nodo)
@@ -76,11 +76,24 @@ class BinaryTree {
         return rightMostFromleft;
     }
 
+    void eliminarArbol(NodeBT<T> *node) {
+        if (!node)
+            return;
+        eliminarArbol(node->left);
+        eliminarArbol(node->right);
+        delete node;
+    }
+
    public:
-    BinaryTree() {
+       BinaryTree() {
         root = nullptr;
         size = 0;
     }
+
+    ~BinaryTree() {
+        eliminarArbol(root);
+    }
+
     bool insertar(T dato) {
         return insertarRecursivo(root, dato);
     }

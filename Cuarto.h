@@ -5,22 +5,26 @@
 
 class Cuarto {
    private:
-    Monster monstruo;
-
    public:
-    Cuarto(Monster nuevoMonstruo) {
+    Monster monstruo;
+    int numeroCuarto;
+    Cuarto(int numero, Monster nuevoMonstruo) {
         monstruo = nuevoMonstruo;
+        numeroCuarto = numero;
     }
 
     Cuarto() {
+        numeroCuarto = 0;
         monstruo = Monster();
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Cuarto& cuarto) {
-        // Aquí puedes definir cómo quieres que se imprima un Cuarto.
-        // Por ejemplo, si quieres imprimir información del Monster en el Cuarto:
         os << "Cuarto con el monstruo: " << cuarto.monstruo;
         return os;
+    }
+
+    bool operator>(const Cuarto& OtroCuarto) {
+        return this->monstruo.getHP() > OtroCuarto.monstruo.getHP();
     }
 };
 
